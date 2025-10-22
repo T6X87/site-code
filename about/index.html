@@ -79,11 +79,39 @@ body {
 
 .image-text-wrapper h1 {
   font-weight: 500;
-  font-size: 3.2rem; /* tuned for compact layout */
+  font-size: 3.2rem;
   letter-spacing: 0.5px;
   margin: 0 0 12px 0;
-  z-index: 4;
-  position: relative;
+}
+
+/* Links row (now ABOVE the slideshow) */
+.links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+/* Link styling — this is the canonical style used by both the top links and the "About" control below image */
+.site-link {
+  text-decoration: none;
+  color: #111;
+  background-color: transparent;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: clamp(0.7rem, 2.2vw, 0.9rem);
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  transition: color 0.18s ease, background-color 0.18s ease, transform 0.08s ease;
+  white-space: nowrap;
+}
+
+/* subtle hover */
+.site-link:hover {
+  color: #666;
+  background-color: rgba(0,0,0,0.02);
+  transform: translateY(-1px);
 }
 
 /* Slideshow */
@@ -97,7 +125,6 @@ body {
   background: #ddd;
 }
 
-/* images inside slideshow */
 .profile {
   width: 100%;
   height: 100%;
@@ -107,75 +134,6 @@ body {
   left: 0;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  z-index: 1; /* behind overlay links */
-}
-
-/* overlay links (on top of the image) */
-.overlay-links {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  display: flex;
-  gap: 10px;
-  z-index: 5; /* ensure on top */
-  flex-wrap: wrap;
-}
-
-.overlay-links a,
-.about-like-link {
-  text-decoration: none;
-  color: #fff; /* white on top of image by default */
-  font-size: clamp(0.7rem, 2.2vw, 0.9rem);
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  transition: color 0.18s ease, opacity 0.18s ease;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
-  opacity: 0.95;
-}
-
-/* lighter / hover state */
-.overlay-links a:hover,
-.about-like-link:hover {
-  opacity: 1;
-  color: #f0f0f0;
-}
-
-/* Make links readable on light backgrounds on very small images:
-   add a subtle backdrop if image is bright (keeps design flexible) */
-.overlay-links a {
-  padding: 6px 8px;
-  border-radius: 999px;
-  background-color: rgba(0,0,0,0.35);
-  font-weight: 500;
-}
-
-/* After the slideshow (below image) we keep an "About" control styled like the links */
-.controls-row {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 6px;
-  gap: 8px;
-}
-
-/* The "About" control styled to look like the overlay links (no box, same hover) */
-.about-like-link {
-  display: inline-block;
-  background-color: transparent;
-  padding: 6px 8px;
-  border-radius: 999px;
-  color: #111;
-  text-decoration: none;
-  font-weight: 500;
-  background-color: transparent;
-  box-shadow: none;
-  transition: color 0.18s ease, background-color 0.18s ease;
-}
-
-/* make hover contrast for the below-image link */
-.controls-row .about-like-link:hover {
-  color: #888;
-  background-color: rgba(0,0,0,0.02);
 }
 
 /* About text area — below the image; limited height on small screens, scrollable if needed */
@@ -191,6 +149,7 @@ body {
   transition: opacity 0.32s ease;
   color: #111;
   background: transparent;
+  padding-right: 6px; /* room for scrollbar */
 }
 
 /* When visible, show and allow internal scrolling on small screens */
@@ -199,14 +158,13 @@ body {
   opacity: 1;
   max-height: 46vh;
   overflow-y: auto;
-  padding-right: 6px;
 }
 
-/* Small responsive tweaks */
+/* small adjustments */
 @media (max-width: 420px) {
   .slideshow-container { height: 360px; }
   .image-text-wrapper h1 { font-size: 2.6rem; }
-  .overlay-links a { font-size: 0.78rem; padding: 5px 7px; }
+  .site-link { font-size: 0.78rem; padding: 5px 7px; }
 }
 </style>
 </head>
@@ -216,7 +174,17 @@ body {
   <div class="image-text-wrapper">
     <h1>T6X87</h1>
 
-    <!-- Slideshow with overlayed links on top of the image -->
+    <!-- LINKS ABOVE THE IMAGE (requested) -->
+    <nav class="links" role="navigation" aria-label="T6X87 social links">
+      <a class="site-link" href="https://onlyfans.com/T6X87" target="_blank" rel="noopener">OnlyFans</a>
+      <a class="site-link" href="https://twitter.com/T6X87" target="_blank" rel="noopener">Twitter/X</a>
+      <a class="site-link" href="https://instagram.com/T6X87" target="_blank" rel="noopener">Instagram</a>
+      <a class="site-link" href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank" rel="noopener">Wishlist</a>
+      <a class="site-link" href="https://t6x87.substack.com/" target="_blank" rel="noopener">Substack</a>
+      <a class="site-link" href="mailto:T6X87@protonmail.com" target="_blank" rel="noopener">Email</a>
+    </nav>
+
+    <!-- Slideshow (under the links) -->
     <div class="slideshow-container" aria-label="T6X87 slideshow of images">
       <img class="profile" src="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg" alt="T6X87 profile photo 1">
       <img class="profile" src="https://pbs.twimg.com/media/GxGYhTAXUAAlhO8.jpg" alt="T6X87 profile photo 2">
@@ -225,21 +193,11 @@ body {
       <img class="profile" src="https://pbs.twimg.com/media/GoWmzWzW0AAAlcq.jpg" alt="T6X87 profile photo 5">
       <img class="profile" src="https://pbs.twimg.com/media/Ggz2YvTWcAIBRrT.jpg" alt="T6X87 profile photo 6">
       <img class="profile" src="https://pbs.twimg.com/media/GYgfJIqWwAACZn_.jpg" alt="T6X87 profile photo 7">
-
-      <!-- links overlayed on top of image (after title) -->
-      <div class="overlay-links" role="navigation" aria-label="T6X87 social links">
-        <a href="https://onlyfans.com/T6X87" target="_blank" rel="noopener">OnlyFans</a>
-        <a href="https://twitter.com/T6X87" target="_blank" rel="noopener">Twitter/X</a>
-        <a href="https://instagram.com/T6X87" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank" rel="noopener">Wishlist</a>
-        <a href="https://t6x87.substack.com/" target="_blank" rel="noopener">Substack</a>
-        <a href="mailto:T6X87@protonmail.com" target="_blank" rel="noopener">Email</a>
-      </div>
     </div>
 
-    <!-- Controls row below the image: About link styled like the overlay links -->
-    <div class="controls-row">
-      <a href="#" id="aboutToggle" class="about-like-link" role="button" aria-expanded="false">About</a>
+    <!-- About (below the image) — styled same as other links -->
+    <div style="width:100%; margin-top:6px;">
+      <a href="#" id="aboutToggle" class="site-link" role="button" aria-expanded="false">About</a>
     </div>
 
     <!-- About text (hidden by default) -->
@@ -257,25 +215,23 @@ Can we ever find freedom? I’m still looking.
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Slideshow guard & behaviour
+  // Slideshow: safe guard & behaviour
   const slides = document.querySelectorAll('.slideshow-container .profile');
   let current = 0;
 
   if (slides.length > 0) {
-    // ensure first image visible
+    slides.forEach(img => img.style.opacity = 0);
     slides[current].style.opacity = 1;
 
-    // cycle
     setInterval(() => {
       const prev = current;
       current = (current + 1) % slides.length;
-      // fade in/out
       slides[current].style.opacity = 1;
       slides[prev].style.opacity = 0;
     }, 1800);
   }
 
-  // About toggle (safe even if element missing)
+  // About toggle
   const aboutLink = document.getElementById('aboutToggle');
   const aboutText = document.getElementById('aboutText');
 
@@ -283,13 +239,12 @@ document.addEventListener('DOMContentLoaded', function () {
     aboutLink.addEventListener('click', function (ev) {
       ev.preventDefault();
       const isVisible = aboutText.classList.toggle('visible');
-      // accessibility attributes
       aboutLink.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
       aboutText.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
-      // change label optionally (comment out if you prefer static "About")
+      // optional label change — keeps user aware of state
       aboutLink.textContent = isVisible ? 'Close' : 'About';
-      // ensure about text is scrolled into view on smaller screens when opened
       if (isVisible) {
+        // on small screens, bring the about panel into view
         aboutText.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     });
