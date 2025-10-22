@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>T6X87 – Creator, Photographer & Content Links</title>
+<meta name="description" content="T6X87 official landing page. Connect on OnlyFans, Twitter/X, Instagram, Wishlist, and Substack. Explore T6X87's latest photos and updates.">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Meta -->
+<meta property="og:title" content="T6X87 – Creator & Content Links">
+<meta property="og:description" content="Connect with T6X87 on OnlyFans, Twitter/X, Instagram, Wishlist, and Substack.">
+<meta property="og:image" content="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg">
+<meta property="og:url" content="https://t6x87.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@T6X87">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "T6X87",
+  "url": "https://t6x87.com",
+  "sameAs": [
+    "https://twitter.com/T6X87",
+    "https://instagram.com/T6X87",
+    "https://onlyfans.com/T6X87",
+    "https://t6x87.substack.com/"
+  ]
+}
+</script>
+
+<style>
+html, body {
+  background-color: #fafafa;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px; /* reduced top padding for tighter layout */
+  max-height: 100%;
+  box-sizing: border-box;
+}
+
+.image-text-wrapper {
+  max-width: 340px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+
+.image-text-wrapper h1 {
+  font-weight: 500;
+  font-size: 4rem;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px 0; /* reduced bottom margin to tighten spacing with slideshow */
+  z-index: 2;
+  position: relative;
+}
+
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.links {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: nowrap;
+  margin-top: 0;
+}
+
+.links a {
+  text-decoration: none;
+  color: #111;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #888;
+}
+</style>
+</head>
+
+<body>
+<main class="container" role="main">
+  <header class="image-text-wrapper">
+    <h1>T6X87</h1>
+  </header>
+
+  <section class="slideshow-container" aria-label="T6X87 slideshow of images">
+    <img class="profile" src="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg" alt="T6X87 profile photo 1" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/GxGYhTAXUAAlhO8.jpg" alt="T6X87 profile photo 2" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/GuDmFx1WwAArkAH.jpg" alt="T6X87 profile photo 3" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/Gorn9BWWEAA1CNv.jpg" alt="T6X87 profile photo 4" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/GoWmzWzW0AAAlcq.jpg" alt="T6X87 profile photo 5" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/Ggz2YvTWcAIBRrT.jpg" alt="T6X87 profile photo 6" loading="lazy">
+    <img class="profile" src="https://pbs.twimg.com/media/GYgfJIqWwAACZn_.jpg" alt="T6X87 profile photo 7" loading="lazy">
+  </section>
+
+  <nav class="links" aria-label="T6X87 social and content links">
+    <a href="https://onlyfans.com/T6X87" target="_blank">OnlyFans</a>
+    <a href="https://twitter.com/T6X87" target="_blank">Twitter/X</a>
+    <a href="https://instagram.com/T6X87" target="_blank">Instagram</a>
+    <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank">Wishlist</a>
+    <a href="https://t6x87.substack.com/" target="_blank">Substack</a>
+    <a href="mailto:T6X87@protonmail.com" target="_blank">Email</a>
+  </nav>
+</main>
+
+<script>
+const slides = document.querySelectorAll('.slideshow-container .profile');
+let current = 0;
+slides[current].style.opacity = 1;
+
+setInterval(() => {
+  const prev = current;
+  current = (current + 1) % slides.length;
+  slides[current].style.opacity = 1;
+  slides[prev].style.opacity = 0;
+}, 1500);
+</script>
+</body>
+</html>
