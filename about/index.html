@@ -40,6 +40,7 @@
 </script>
 
 <style>
+/* Base / layout */
 html, body {
   background-color: #fafafa;
   font-family: 'Inter', sans-serif;
@@ -48,26 +49,29 @@ html, body {
   padding: 0;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* allow vertical scroll so About content can expand on mobile */
 }
 
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 28px 0;
 }
 
+/* Center column */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 20px;
-  max-height: 100%;
+  padding: 20px;
+  max-width: 380px;
+  width: 100%;
   box-sizing: border-box;
 }
 
+/* Title */
 .image-text-wrapper {
-  max-width: 340px;
   width: 100%;
   text-align: left;
   position: relative;
@@ -75,21 +79,25 @@ body {
 
 .image-text-wrapper h1 {
   font-weight: 500;
-  font-size: 4rem;
+  font-size: 3.2rem; /* tuned for compact layout */
   letter-spacing: 0.5px;
-  margin: 0 0 24px 0;
-  z-index: 2;
+  margin: 0 0 12px 0;
+  z-index: 4;
   position: relative;
 }
 
+/* Slideshow */
 .slideshow-container {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 420px;
   overflow: hidden;
-  margin-bottom: 24px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: #ddd;
 }
 
+/* images inside slideshow */
 .profile {
   width: 100%;
   height: 100%;
@@ -99,61 +107,106 @@ body {
   left: 0;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  z-index: 1; /* behind overlay links */
 }
 
-.links {
+/* overlay links (on top of the image) */
+.overlay-links {
+  position: absolute;
+  top: 12px;
+  left: 12px;
   display: flex;
-  justify-content: flex-start;
-  gap: 12px;
-  width: 100%;
-  flex-wrap: nowrap;
-  margin-top: 0;
+  gap: 10px;
+  z-index: 5; /* ensure on top */
+  flex-wrap: wrap;
 }
 
-.links a {
+.overlay-links a,
+.about-like-link {
   text-decoration: none;
-  color: #111;
-  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  color: #fff; /* white on top of image by default */
+  font-size: clamp(0.7rem, 2.2vw, 0.9rem);
   letter-spacing: 0.5px;
   white-space: nowrap;
-  transition: color 0.2s ease;
+  transition: color 0.18s ease, opacity 0.18s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 0.95;
 }
 
-.links a:hover {
-  color: #888;
+/* lighter / hover state */
+.overlay-links a:hover,
+.about-like-link:hover {
+  opacity: 1;
+  color: #f0f0f0;
 }
 
-.about-button {
-  border: 1px solid #111;
-  background: transparent;
+/* Make links readable on light backgrounds on very small images:
+   add a subtle backdrop if image is bright (keeps design flexible) */
+.overlay-links a {
+  padding: 6px 8px;
+  border-radius: 999px;
+  background-color: rgba(0,0,0,0.35);
+  font-weight: 500;
+}
+
+/* After the slideshow (below image) we keep an "About" control styled like the links */
+.controls-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 6px;
+  gap: 8px;
+}
+
+/* The "About" control styled to look like the overlay links (no box, same hover) */
+.about-like-link {
+  display: inline-block;
+  background-color: transparent;
+  padding: 6px 8px;
+  border-radius: 999px;
   color: #111;
-  padding: 6px 16px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  border-radius: 2rem;
-  margin-top: 14px;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  font-weight: 500;
+  background-color: transparent;
+  box-shadow: none;
+  transition: color 0.18s ease, background-color 0.18s ease;
 }
 
-.about-button:hover {
-  background-color: #111;
-  color: #fafafa;
+/* make hover contrast for the below-image link */
+.controls-row .about-like-link:hover {
+  color: #888;
+  background-color: rgba(0,0,0,0.02);
 }
 
+/* About text area — below the image; limited height on small screens, scrollable if needed */
 .about-text {
-  max-width: 320px;
-  margin-top: 18px;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  line-height: 1.45;
   white-space: pre-line;
   display: none;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.32s ease;
+  color: #111;
+  background: transparent;
 }
 
+/* When visible, show and allow internal scrolling on small screens */
 .about-text.visible {
   display: block;
   opacity: 1;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 420px) {
+  .slideshow-container { height: 360px; }
+  .image-text-wrapper h1 { font-size: 2.6rem; }
+  .overlay-links a { font-size: 0.78rem; padding: 5px 7px; }
 }
 </style>
 </head>
@@ -162,6 +215,8 @@ body {
 <div class="container">
   <div class="image-text-wrapper">
     <h1>T6X87</h1>
+
+    <!-- Slideshow with overlayed links on top of the image -->
     <div class="slideshow-container" aria-label="T6X87 slideshow of images">
       <img class="profile" src="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg" alt="T6X87 profile photo 1">
       <img class="profile" src="https://pbs.twimg.com/media/GxGYhTAXUAAlhO8.jpg" alt="T6X87 profile photo 2">
@@ -170,45 +225,76 @@ body {
       <img class="profile" src="https://pbs.twimg.com/media/GoWmzWzW0AAAlcq.jpg" alt="T6X87 profile photo 5">
       <img class="profile" src="https://pbs.twimg.com/media/Ggz2YvTWcAIBRrT.jpg" alt="T6X87 profile photo 6">
       <img class="profile" src="https://pbs.twimg.com/media/GYgfJIqWwAACZn_.jpg" alt="T6X87 profile photo 7">
-    </div>
-    <div class="links">
-      <a href="https://onlyfans.com/T6X87" target="_blank">OnlyFans</a>
-      <a href="https://twitter.com/T6X87" target="_blank">Twitter/X</a>
-      <a href="https://instagram.com/T6X87" target="_blank">Instagram</a>
-      <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank">Wishlist</a>
-      <a href="https://t6x87.substack.com/" target="_blank">Substack</a>
-      <a href="mailto:T6X87@protonmail.com" target="_blank">Email</a>
+
+      <!-- links overlayed on top of image (after title) -->
+      <div class="overlay-links" role="navigation" aria-label="T6X87 social links">
+        <a href="https://onlyfans.com/T6X87" target="_blank" rel="noopener">OnlyFans</a>
+        <a href="https://twitter.com/T6X87" target="_blank" rel="noopener">Twitter/X</a>
+        <a href="https://instagram.com/T6X87" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank" rel="noopener">Wishlist</a>
+        <a href="https://t6x87.substack.com/" target="_blank" rel="noopener">Substack</a>
+        <a href="mailto:T6X87@protonmail.com" target="_blank" rel="noopener">Email</a>
+      </div>
     </div>
 
-    <button class="about-button" onclick="toggleAbout()">About</button>
-
-    <div id="aboutText" class="about-text">
-      I don’t know why I do this but I can’t stop.  
-      Authenticity. Artifice. Identity. Desire. But is it art? Is baring your flesh the same as baring your soul? Is it creative expression or do I have bills to pay? You tell me.
-      The camera never lies, but it can spin a long yarn. You just need to know your angles.
-      Intensity, vulnerability, and freedom can coexist. Please. I need you to look at me. I don’t mean to be obnoxious; I’m just being honest.
-      We can all be beautiful. We can all be real. But most of all: we can be whoever we want to be.
-      Can we ever find freedom? I’m still looking.
+    <!-- Controls row below the image: About link styled like the overlay links -->
+    <div class="controls-row">
+      <a href="#" id="aboutToggle" class="about-like-link" role="button" aria-expanded="false">About</a>
     </div>
+
+    <!-- About text (hidden by default) -->
+    <div id="aboutText" class="about-text" aria-hidden="true">
+I don’t know why I do this but I can’t stop.  
+Authenticity. Artifice. Identity. Desire. But is it art? Is baring your flesh the same as baring your soul? Is it creative expression or do I have bills to pay? You tell me.
+The camera never lies, but it can spin a long yarn. You just need to know your angles.
+Intensity, vulnerability, and freedom can coexist. Please. I need you to look at me. I don’t mean to be obnoxious; I’m just being honest. 
+We can all be beautiful. We can all be real. But most of all: we can be whoever we want to be.
+Can we ever find freedom? I’m still looking.
+    </div>
+
   </div>
 </div>
 
 <script>
-const slides = document.querySelectorAll('.slideshow-container .profile');
-let current = 0;
-slides[current].style.opacity = 1;
+document.addEventListener('DOMContentLoaded', function () {
+  // Slideshow guard & behaviour
+  const slides = document.querySelectorAll('.slideshow-container .profile');
+  let current = 0;
 
-setInterval(() => {
-  const prev = current;
-  current = (current + 1) % slides.length;
-  slides[current].style.opacity = 1;
-  slides[prev].style.opacity = 0;
-}, 1500);
+  if (slides.length > 0) {
+    // ensure first image visible
+    slides[current].style.opacity = 1;
 
-function toggleAbout() {
-  const about = document.getElementById('aboutText');
-  about.classList.toggle('visible');
-}
+    // cycle
+    setInterval(() => {
+      const prev = current;
+      current = (current + 1) % slides.length;
+      // fade in/out
+      slides[current].style.opacity = 1;
+      slides[prev].style.opacity = 0;
+    }, 1800);
+  }
+
+  // About toggle (safe even if element missing)
+  const aboutLink = document.getElementById('aboutToggle');
+  const aboutText = document.getElementById('aboutText');
+
+  if (aboutLink && aboutText) {
+    aboutLink.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      const isVisible = aboutText.classList.toggle('visible');
+      // accessibility attributes
+      aboutLink.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
+      aboutText.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+      // change label optionally (comment out if you prefer static "About")
+      aboutLink.textContent = isVisible ? 'Close' : 'About';
+      // ensure about text is scrolled into view on smaller screens when opened
+      if (isVisible) {
+        aboutText.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
