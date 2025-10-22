@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* center horizontally */
-  padding: 40px 20px;
+  padding: 20px 20px; /* reduced top padding to move title up */
   max-height: 100%;
   box-sizing: border-box;
 }
@@ -43,7 +43,7 @@ body {
 
 .image-text-wrapper h1 {
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 4rem; /* about twice as tall */
   letter-spacing: 0.5px;
   margin: 0 0 24px 0;
   z-index: 2;
@@ -82,7 +82,7 @@ body {
 .links a {
   text-decoration: none;
   color: #111;
-  font-size: clamp(0.7rem, 2vw, 0.85rem); /* responsive: shrinks on mobile */
+  font-size: clamp(0.7rem, 2vw, 0.85rem); /* responsive */
   letter-spacing: 0.5px;
   white-space: nowrap;
   transition: color 0.2s ease;
