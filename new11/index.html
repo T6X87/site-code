@@ -48,7 +48,7 @@ html, body {
   padding: 0;
   height: 100%;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: hidden; /* prevent vertical scroll */
 }
 
 body {
@@ -61,7 +61,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 20px; /* reduced top padding for tighter layout */
+  padding: 20px 20px;
   max-height: 100%;
   box-sizing: border-box;
 }
@@ -75,9 +75,9 @@ body {
 
 .image-text-wrapper h1 {
   font-weight: 500;
-  font-size: 4rem;
+  font-size: 4rem; /* doubled size */
   letter-spacing: 0.5px;
-  margin: 0 0 16px 0; /* reduced bottom margin to tighten spacing with slideshow */
+  margin: 0 0 24px 0;
   z-index: 2;
   position: relative;
 }
@@ -85,7 +85,7 @@ body {
 .slideshow-container {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 450px; /* fixed height as before */
   overflow: hidden;
   margin-bottom: 24px;
 }
@@ -93,7 +93,7 @@ body {
 .profile {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* keeps image filling container without resizing */
   position: absolute;
   top: 0;
   left: 0;
@@ -113,7 +113,7 @@ body {
 .links a {
   text-decoration: none;
   color: #111;
-  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  font-size: clamp(0.7rem, 2vw, 0.85rem); /* responsive font for mobile */
   letter-spacing: 0.5px;
   white-space: nowrap;
   transition: color 0.2s ease;
@@ -126,41 +126,39 @@ body {
 </head>
 
 <body>
-<main class="container" role="main">
-  <header class="image-text-wrapper">
+<div class="container">
+  <div class="image-text-wrapper">
     <h1>T6X87</h1>
-  </header>
-
-  <section class="slideshow-container" aria-label="T6X87 slideshow of images">
-    <img class="profile" src="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg" alt="T6X87 profile photo 1" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/GxGYhTAXUAAlhO8.jpg" alt="T6X87 profile photo 2" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/GuDmFx1WwAArkAH.jpg" alt="T6X87 profile photo 3" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/Gorn9BWWEAA1CNv.jpg" alt="T6X87 profile photo 4" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/GoWmzWzW0AAAlcq.jpg" alt="T6X87 profile photo 5" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/Ggz2YvTWcAIBRrT.jpg" alt="T6X87 profile photo 6" loading="lazy">
-    <img class="profile" src="https://pbs.twimg.com/media/GYgfJIqWwAACZn_.jpg" alt="T6X87 profile photo 7" loading="lazy">
-  </section>
-
-  <nav class="links" aria-label="T6X87 social and content links">
-    <a href="https://onlyfans.com/T6X87" target="_blank">OnlyFans</a>
-    <a href="https://twitter.com/T6X87" target="_blank">Twitter/X</a>
-    <a href="https://instagram.com/T6X87" target="_blank">Instagram</a>
-    <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank">Wishlist</a>
-    <a href="https://t6x87.substack.com/" target="_blank">Substack</a>
-    <a href="mailto:T6X87@protonmail.com" target="_blank">Email</a>
-  </nav>
-</main>
+    <div class="slideshow-container" aria-label="T6X87 slideshow of images">
+      <img class="profile" src="https://pbs.twimg.com/media/GzoNx7CXAAAdjhP.jpg" alt="T6X87 profile photo 1">
+      <img class="profile" src="https://pbs.twimg.com/media/GxGYhTAXUAAlhO8.jpg" alt="T6X87 profile photo 2">
+      <img class="profile" src="https://pbs.twimg.com/media/GuDmFx1WwAArkAH.jpg" alt="T6X87 profile photo 3">
+      <img class="profile" src="https://pbs.twimg.com/media/Gorn9BWWEAA1CNv.jpg" alt="T6X87 profile photo 4">
+      <img class="profile" src="https://pbs.twimg.com/media/GoWmzWzW0AAAlcq.jpg" alt="T6X87 profile photo 5">
+      <img class="profile" src="https://pbs.twimg.com/media/Ggz2YvTWcAIBRrT.jpg" alt="T6X87 profile photo 6">
+      <img class="profile" src="https://pbs.twimg.com/media/GYgfJIqWwAACZn_.jpg" alt="T6X87 profile photo 7">
+    </div>
+    <div class="links">
+      <a href="https://onlyfans.com/T6X87" target="_blank">OnlyFans</a>
+      <a href="https://twitter.com/T6X87" target="_blank">Twitter/X</a>
+      <a href="https://instagram.com/T6X87" target="_blank">Instagram</a>
+      <a href="https://www.amazon.co.uk/hz/wishlist/ls/23B45Z7AUU74W?ref_=wl_share" target="_blank">Wishlist</a>
+      <a href="https://t6x87.substack.com/" target="_blank">Substack</a>
+      <a href="mailto:T6X87@protonmail.com" target="_blank">Email</a>
+    </div>
+  </div>
+</div>
 
 <script>
 const slides = document.querySelectorAll('.slideshow-container .profile');
 let current = 0;
-slides[current].style.opacity = 1;
+slides[current].style.opacity = 1; // show first image
 
 setInterval(() => {
   const prev = current;
   current = (current + 1) % slides.length;
-  slides[current].style.opacity = 1;
-  slides[prev].style.opacity = 0;
+  slides[current].style.opacity = 1; // fade in next
+  slides[prev].style.opacity = 0;    // fade out previous
 }, 1500);
 </script>
 </body>
